@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-from src.clients.constants import *
 from src.exceptions import LoginException, ServerException
 
 
@@ -9,6 +8,16 @@ class BaseClient:
     """
     BJUT educational administration clients
     """
+    LOGIN_URL = "http://gdjwgl.bjut.edu.cn/default_vsso.aspx"
+    LOGIN_DATA = {
+        "username": "TextBox1",
+        "password": "TextBox2",
+    }
+    LOGIN_DEFAULT_DATA = {  # 直接拼接到请求参数里
+        "RadioButtonList1_2": "%D1%A7%C9%FA",  # 学生 gbk 编码
+        "Button1": ""
+    }
+    SESSION_COOKIE_PARAM = "ASP.NET_SessionId"
 
     def __init__(self, ID, password):
         self.ID = ID
@@ -27,11 +36,11 @@ class BaseClient:
                 return False
             return True
 
-        request_data = dict(HIDDEN_LOGIN_DEFAULT_PARAMS)
-        request_data[HIDDEN_LOGIN_PARAMS.get('username')] = self.ID
-        request_data[HIDDEN_LOGIN_PARAMS.get('password')] = self.password
+        request_data = dict(self.LOGIN_DEFAULT_DATA)
+        request_data[self.LOGIN_DATA.get('username')] = self.ID
+        request_data[self.LOGIN_DATA.get('password')] = self.password
 
-        res = self.session.post(HIDDEN_LOGIN_URL, data=request_data)
+        res = self.session.post(self.LOGIN_URL, data=request_data)
         assert res.status_code == 200
 
         if not _is_login_success(res):
