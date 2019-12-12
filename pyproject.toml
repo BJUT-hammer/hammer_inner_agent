@@ -8,6 +8,7 @@ authors = ["wxx <xiaoximew@gmail.com>"]
 python = "^3.7"
 beautifulsoup4 = "^4.8"
 sanic = "^19.9"
+requests = "^2.22"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7"
