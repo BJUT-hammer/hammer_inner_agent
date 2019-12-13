@@ -56,7 +56,7 @@ class GradeClient(BaseClient):
 
         res = self.session.post(self.grade_url)
         assert res.status_code == 200
-        soup = BeautifulSoup(res.content, 'html.parser')
+        soup = BeautifulSoup(res.content, 'lxml')
         return str(soup.input.get("value"))
 
     def get_specified_term_course(self, year=None, term=None):
@@ -85,4 +85,5 @@ class GradeClient(BaseClient):
         request_data['ddlXQ'] = term
 
         res = self.session.post(self.grade_url, data=request_data)
-        return res
+        content = res.content
+        return content

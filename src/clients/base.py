@@ -31,7 +31,7 @@ class BaseClient:
         :return:
         """
         def _is_login_success(res):
-            soup = BeautifulSoup(res.content, 'html.parser')
+            soup = BeautifulSoup(res.content, 'lxml')
             if "ERROR" in str(soup.title):
                 return False
             return True
