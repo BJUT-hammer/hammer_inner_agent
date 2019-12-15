@@ -16,6 +16,7 @@ class BaseFactory:
         code = soup.html.get('lang')
         if not code:
             # todo: logger record
+            print("Could not get the lang code")
             code = GBK
         return code
 
