@@ -19,10 +19,8 @@ async def course_grades(request):
         'term': '',
     }
 
-    body = json.loads(str(request.body, 'utf-8'))
-
     for key in data:
-        data[key] = body.get(key)
+        data[key] = request.json.get(key)
 
     ID = data.get('ID')
     if not ID:
@@ -40,4 +38,4 @@ async def course_grades(request):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=8200)

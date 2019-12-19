@@ -13,6 +13,8 @@ lxml = "^4.4"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7"
+patchwork = "^1.0"
+fabric = "^2.5"
 
 [build-system]
 requires = ["poetry>=0.12"]
